@@ -1,0 +1,40 @@
+% QRfactor.m | Mike Brice
+
+% Function Parameters
+%   R = a nxn matrix
+
+% Function Returns
+%  Q = Orthogonal Matrix 
+%  R = Upper Triangular Matrix
+
+function [Q, R] = QRfactor(R)
+
+% Gets the number of rows and columns from the matrix R
+nmatrix = size(R);
+
+% Gets the number of rows and stores it in n
+n = nmatrix(1);
+
+% Generates the Identity matrix of size n
+I = eye(n);
+Q = I;
+
+for j = 1:n-1
+    
+    c = R(:,j);
+    c(1:j-1) = 0;
+    e(1:n,1) = 0;
+    
+    if c(j) > 0
+        e(j) = 1;
+    else
+        e(j) = -1;
+    end
+    
+    clength = sqrt(c' * c);
+    v = c + clength * e;
+    H = I - 2 / (v' * v) * (v * v');
+    Q = Q * H;
+    R = H * R;
+end
+end
